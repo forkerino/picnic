@@ -10,7 +10,10 @@ const app = express();
 dotenv.config();
 const dburl = process.env.MONGOLAB_URI;
 
-
+mongo.connect(dburl, function(err,db){
+    if (err) throw err;
+    db.createCollection('searchhistory',{capped: true, size: 10});
+});
 
 app.get('/api/imagesearch/:searchquery', function(req, res){
     let term = req.params.searchquery;
@@ -40,6 +43,7 @@ app.get('/api/imagesearch/:searchquery', function(req, res){
        let history = db.collection('searchhistory');
        history.insert({term, when}, function(err,data){
            if (err) throw err;
+           db.close();
        });
     });
 });
@@ -54,6 +58,7 @@ app.get('/api/latest/imagesearch', function(req, res){
                 return { term: doc.term, when: doc.when };   
             });
             res.end(JSON.stringify(displayTerms));
+            db.close();
        });
     });
 });
