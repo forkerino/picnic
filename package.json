@@ -1,0 +1,28 @@
+{
+  "name": "picnic",
+  "version": "1.0.0",
+  "description": "Image Search Abstraction Layer FCC Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forkerino/picnic.git"
+  },
+  "keywords": [
+    "FCC"
+  ],
+  "author": "Pieter Stokkink",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/forkerino/picnic/issues"
+  },
+  "homepage": "https://github.com/forkerino/picnic#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "express": "^4.14.0",
+    "mongodb": "^2.2.21",
+    "node-google-image-search": "^1.0.2"
+  }
+}
