@@ -4,11 +4,14 @@ const express = require('express');
 const mongo = require('mongodb').MongoClient;
 const dotenv = require('dotenv');
 const searchImages = require('node-google-image-search');
+const path = require('path');
 
 const app = express();
 
 dotenv.config();
 const dburl = process.env.MONGOLAB_URI;
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 mongo.connect(dburl, function(err,db){
     if (err) throw err;
@@ -63,7 +66,11 @@ app.get('/api/latest/imagesearch', function(req, res){
     });
 });
 
+app.get('*', function(req, res){
+    res.sendFile(path.join(__dirname, 'public', 'index.html')); 
+});
+
 app.listen(process.env.PORT || 8080, function(){
-    console.log("listening...")
+    console.log("listening...");
 });
 
